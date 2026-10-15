@@ -53,13 +53,8 @@ h2{margin:0 0 .8rem;font-weight:800;font-size:clamp(1.7rem,1.2rem + 2.6vw,3rem);
 .vcard{position:relative;border-radius:24px;overflow:hidden;aspect-ratio:9/16;background:linear-gradient(135deg,#141414,#0A0A0A);border:1px solid var(--line);transition:border-color .4s,transform .4s}
 .vcard:hover{border-color:rgba(46,143,255,.5);transform:translateY(-6px)}
 .vcard video{position:absolute;inset:0;width:100%;height:100%;object-fit:cover;z-index:2}
-.vcard::after{content:'';position:absolute;inset:0;z-index:1;background:linear-gradient(180deg,transparent 55%,rgba(0,0,0,.75));pointer-events:none}
-.vcard__cat{position:absolute;top:1.1rem;left:1.1rem;z-index:3;font-size:.7rem;letter-spacing:.2em;color:var(--accent);text-transform:uppercase;font-weight:600}
-.vcard__play{position:absolute;top:50%;left:50%;transform:translate(-50%,-50%);width:64px;height:64px;border-radius:50%;background:#fff;display:flex;align-items:center;justify-content:center;z-index:3}
-.vcard__play svg{width:36%;height:36%;fill:#000;margin-left:6%}
-.vcard__title{position:absolute;bottom:1.1rem;left:1.1rem;right:1.1rem;z-index:3;font-size:1.05rem;font-weight:800;letter-spacing:-.02em;line-height:1.2}
-.vcard__ph{position:absolute;inset:0;z-index:1;display:flex;align-items:center;justify-content:center;padding:1rem;background:linear-gradient(135deg,#141414,#0A0A0A)}
-.vcard__ph code{font-size:.7rem;color:var(--muted);padding:.35rem .7rem;border-radius:6px;background:rgba(255,255,255,.05);border:1px solid var(--line)}
+.vcard::after{content:'';position:absolute;inset:0;z-index:3;background:linear-gradient(180deg,transparent 55%,rgba(0,0,0,.75));pointer-events:none}
+.vcard__title{position:absolute;bottom:1.1rem;left:1.1rem;right:1.1rem;z-index:4;font-size:1.05rem;font-weight:800;letter-spacing:-.02em;line-height:1.2}
 
 .ba{position:relative;border-radius:24px;overflow:hidden;aspect-ratio:16/9;border:1px solid var(--line);user-select:none;touch-action:pan-y;background:#0A0A0A}
 @media(max-width:640px){.ba{aspect-ratio:4/3}}
@@ -118,7 +113,6 @@ main{position:relative;isolation:isolate}
 
 footer{padding-block:2rem 2.5rem;color:var(--muted);font-size:.9rem}
 
-/* CTA-блок */
 .cta-box{background:#4A9BFF;color:#06101F;border-radius:28px;padding:clamp(1.6rem,5vw,3.2rem)}
 .cta-box__title{margin:0 0 .9rem;color:#06101F;font-size:clamp(1.8rem,1.2rem + 2.8vw,3rem);font-weight:800;letter-spacing:-.03em;line-height:1.1}
 .cta-box__accent{color:rgba(6,16,31,.35);font-weight:800}
@@ -194,24 +188,15 @@ footer{padding-block:2rem 2.5rem;color:var(--muted);font-size:.9rem}
       <div class="videos">
         <div class="vcard">
           <video src="avatar.mp4" autoplay muted loop playsinline preload="metadata"></video>
-          <div class="vcard__cat">Avatar</div>
-          <div class="vcard__ph"><code>avatar.mp4</code></div>
-          <div class="vcard__play"><svg viewBox="0 0 24 24"><path d="M8 5v14l11-7z"/></svg></div>
-          <div class="vcard__title">Мой цифровой двойник</div>
+          <div class="vcard__title">Еда и доставка</div>
         </div>
         <div class="vcard">
           <video src="beauty.mp4" autoplay muted loop playsinline preload="metadata"></video>
-          <div class="vcard__cat">Beauty</div>
-          <div class="vcard__ph"><code>beauty.mp4</code></div>
-          <div class="vcard__play"><svg viewBox="0 0 24 24"><path d="M8 5v14l11-7z"/></svg></div>
-          <div class="vcard__title">Эксперт в бьюти-сфере</div>
+          <div class="vcard__title">Мой цифровой двойник</div>
         </div>
         <div class="vcard">
           <video src="logistics.mp4" autoplay muted loop playsinline preload="metadata"></video>
-          <div class="vcard__cat">Logistics</div>
-          <div class="vcard__ph"><code>logistics.mp4</code></div>
-          <div class="vcard__play"><svg viewBox="0 0 24 24"><path d="M8 5v14l11-7z"/></svg></div>
-          <div class="vcard__title">Грузоперевозки — B2B</div>
+          <div class="vcard__title">Недвижимость</div>
         </div>
       </div>
     </section>
