@@ -16,13 +16,24 @@
   --ink:#F4F4F6; --muted:#A0A0AA; --accent:#2E8FFF; --on-accent:#06101F;
   --font:"Montserrat",system-ui,-apple-system,"Segoe UI",Roboto,Arial,sans-serif;
   --pad:clamp(1.1rem,5vw,2rem);
+  --safe-top:env(safe-area-inset-top, 0px);
+  --safe-bottom:env(safe-area-inset-bottom, 0px);
 }
 *,*::before,*::after{box-sizing:border-box}
 html{-webkit-text-size-adjust:100%;scroll-behavior:smooth}
-body{margin:0;overflow-x:clip;background:var(--bg);color:var(--ink);font:500 clamp(1rem,.95rem + .2vw,1.1rem)/1.6 var(--font)}
+body{
+  margin:0;overflow-x:clip;background:var(--bg);color:var(--ink);
+  font:500 clamp(1rem,.95rem + .2vw,1.1rem)/1.6 var(--font);
+  padding-bottom: var(--safe-bottom);
+}
 a{color:inherit}
 ul{list-style:none;margin:0;padding:0}
-.wrap{width:100%;max-width:1120px;margin-inline:auto;padding-left:max(var(--pad),env(safe-area-inset-left));padding-right:max(var(--pad),env(safe-area-inset-right))}
+.wrap{
+  width:100%;max-width:1120px;margin-inline:auto;
+  padding-left:max(var(--pad),env(safe-area-inset-left));
+  padding-right:max(var(--pad),env(safe-area-inset-right));
+  padding-top: var(--safe-top);
+}
 .btn{text-align:center;display:inline-flex;align-items:center;justify-content:center;min-height:52px;padding:.8rem 1.5rem;border-radius:14px;font-weight:600;text-decoration:none;border:2px solid var(--accent);transition:transform .15s}
 .btn:active{transform:scale(.98)}
 .btn--main{background:var(--accent);color:var(--on-accent)}
@@ -56,15 +67,46 @@ h2{margin:0 0 .8rem;font-weight:800;font-size:clamp(1.7rem,1.2rem + 2.6vw,3rem);
 .vcard::after{content:'';position:absolute;inset:0;z-index:3;background:linear-gradient(180deg,transparent 55%,rgba(0,0,0,.75));pointer-events:none}
 .vcard__title{position:absolute;bottom:1.1rem;left:1.1rem;right:1.1rem;z-index:4;font-size:1.05rem;font-weight:800;letter-spacing:-.02em;line-height:1.2}
 
-/* ====== БЛОК СРАВНЕНИЯ ====== */
-.ba{position:relative;border-radius:24px;overflow:hidden;aspect-ratio:16/9;border:1px solid var(--line);user-select:none;touch-action:pan-y;background:#0A0A0A}
-@media(max-width:640px){.ba{aspect-ratio:4/3}}
+.ba{
+  position:relative;
+  border-radius:24px;
+  overflow:hidden;
+  aspect-ratio: 16/10;
+  border:2px solid var(--line);
+  user-select:none;
+  touch-action:pan-y;
+  background:#0A0A0A;
+  box-shadow: 0 20px 40px rgba(0,0,0,0.6);
+  max-height: 700px;
+  margin-inline: auto;
+}
+@media(max-width:768px){
+  .ba{aspect-ratio: 1/1; max-height: none;}
+}
+
+.ba__label-text {
+  position: absolute;
+  top: 1.5rem;
+  font-size: 1rem;
+  font-weight: 800;
+  text-transform: uppercase;
+  letter-spacing: 0.1em;
+  color: #fff;
+  z-index: 10;
+  background: rgba(0,0,0,0.7);
+  padding: 0.6rem 1.2rem;
+  border-radius: 10px;
+  backdrop-filter: blur(6px);
+  pointer-events: none;
+  border: 1px solid rgba(255,255,255,0.3);
+}
+.ba__label-text--left { left: 2rem; }
+.ba__label-text--right { right: 2rem; }
 
 .ba__side{position:absolute;inset:0;display:flex;align-items:center;justify-content:center;overflow:hidden}
 .ba__before{background:#0d1319;z-index:1}
 .ba__after{background:#0a1e2e;z-index:2;clip-path:inset(0 50% 0 0)}
 
-/* Картинки внутри ползунка */
 .ba__img {
   position: absolute;
   inset: 0;
@@ -74,9 +116,31 @@ h2{margin:0 0 .8rem;font-weight:800;font-size:clamp(1.7rem,1.2rem + 2.6vw,3rem);
   display: block;
 }
 
-.ba__handle{position:absolute;top:0;bottom:0;left:50%;width:2px;background:var(--accent);transform:translateX(-50%);cursor:ew-resize;z-index:5;box-shadow:0 0 20px rgba(46,143,255,.7)}
-.ba__handle::before{content:'';position:absolute;top:50%;left:50%;transform:translate(-50%,-50%);width:clamp(44px,9vw,56px);height:clamp(44px,9vw,56px);border-radius:50%;background:#fff;box-shadow:0 6px 20px rgba(0,0,0,.4)}
-.ba__handle::after{content:'⇄';position:absolute;top:50%;left:50%;transform:translate(-50%,-50%);color:#000;font-size:1.1rem;font-weight:800}
+.ba__handle{
+  position:absolute;top:0;bottom:0;left:50%;width:6px;
+  background:var(--accent);transform:translateX(-50%);cursor:ew-resize;z-index:5;
+  box-shadow:0 0 30px rgba(46,143,255,1);
+}
+
+.ba__handle::before{
+  content:'';position:absolute;top:50%;left:50%;transform:translate(-50%,-50%);
+  width:90px;height:90px;
+  border-radius:50%;background:#fff;
+  box-shadow:0 8px 30px rgba(0,0,0,.8), 0 0 0 8px rgba(255,255,255,0.2);
+  animation: pulseHandle 2s infinite;
+}
+
+.ba__handle::after{
+  content:'↔';position:absolute;top:50%;left:50%;transform:translate(-50%,-50%);
+  color:#06101F;font-size:2.4rem;
+  font-weight:800;
+}
+
+@keyframes pulseHandle {
+  0% { box-shadow: 0 8px 30px rgba(0,0,0,.8), 0 0 0 0 rgba(46,143,255,0.8); }
+  70% { box-shadow: 0 8px 30px rgba(0,0,0,.8), 0 0 0 25px rgba(46,143,255,0); }
+  100% { box-shadow: 0 8px 30px rgba(0,0,0,.8), 0 0 0 0 rgba(46,143,255,0); }
+}
 
 .pain{display:grid;gap:1rem;grid-template-columns:1fr}
 .pain__card{background:var(--panel);border:1px solid var(--line);border-radius:24px;padding:1.6rem 1.5rem}
@@ -97,14 +161,13 @@ h2{margin:0 0 .8rem;font-weight:800;font-size:clamp(1.7rem,1.2rem + 2.6vw,3rem);
 .steps__arrow svg{width:clamp(32px,4vw,48px);height:auto;display:block;stroke:currentColor;stroke-width:2;fill:none;stroke-linecap:round;stroke-linejoin:round;transform:rotate(90deg)}
 
 .plans{display:grid;gap:1rem}
-.plan{display:grid;grid-template-rows:auto auto auto auto auto 1fr auto;background:var(--panel);border:1px solid var(--line);border-radius:24px;padding:1.8rem}
+.plan{display:grid;grid-template-rows:auto auto auto 1fr auto;background:var(--panel);border:1px solid var(--line);border-radius:24px;padding:1.8rem}
 .plan__badge-zone{height:32px;display:flex;align-items:center;margin-bottom:.8rem}
 .plan__badge{display:inline-flex;align-items:center;padding:.35rem .85rem;border-radius:99px;border:1px solid var(--accent);color:var(--accent);font-size:.72rem;font-weight:700;letter-spacing:.06em;text-transform:uppercase;line-height:1;white-space:nowrap}
 .plan__badge--hidden{visibility:hidden}
 .plan h3{margin:0 0 .3rem;font-size:1.3rem;font-weight:800;line-height:1.2;color:#fff}
-.plan .price{margin:0 0 1rem;font-weight:800;font-size:clamp(2.1rem,1.6rem + 2vw,2.8rem);line-height:1;letter-spacing:-.03em;color:#fff}
+.plan .price{margin:0 0 1.4rem;font-weight:800;font-size:clamp(2.1rem,1.6rem + 2vw,2.8rem);line-height:1;letter-spacing:-.03em;color:#fff}
 .plan .price small{font-size:.9rem;font-weight:500;color:var(--muted)}
-.plan .about{margin:0 0 1.4rem;color:var(--muted);font-size:.95rem;line-height:1.55}
 .plan ul{margin:0 0 1.8rem;display:flex;flex-direction:column;gap:.55rem}
 .plan li{position:relative;padding-left:1.7rem;line-height:1.45;color:var(--ink);font-size:.95rem}
 .plan li::before{content:"";position:absolute;left:0;top:.55em;width:.55rem;height:.3rem;border-left:2px solid var(--accent);border-bottom:2px solid var(--accent);transform:rotate(-45deg)}
@@ -121,7 +184,7 @@ h2{margin:0 0 .8rem;font-weight:800;font-size:clamp(1.7rem,1.2rem + 2.6vw,3rem);
 
 main{position:relative;isolation:isolate}
 
-footer{padding-block:2rem 2.5rem;color:var(--muted);font-size:.9rem}
+footer{padding-block:2rem calc(2.5rem + var(--safe-bottom));color:var(--muted);font-size:.9rem}
 
 .cta-box{background:#4A9BFF;color:#06101F;border-radius:28px;padding:clamp(1.6rem,5vw,3.2rem)}
 .cta-box__title{margin:0 0 .9rem;color:#06101F;font-size:clamp(1.8rem,1.2rem + 2.8vw,3rem);font-weight:800;letter-spacing:-.03em;line-height:1.1}
@@ -134,29 +197,9 @@ footer{padding-block:2rem 2.5rem;color:var(--muted);font-size:.9rem}
 .cta-form__btn{grid-column:1/-1;min-height:56px;padding:0 1.4rem;border:0;border-radius:14px;background:#06101F;color:#fff;font:800 1rem var(--font);letter-spacing:.06em;text-transform:uppercase;cursor:pointer}
 .cta-form__btn:hover{background:#0d1a2b}
 .cta-box__note{margin:0;font-size:.82rem;color:rgba(6,16,31,.7);font-weight:600}
-@media (min-width:640px){
-  .cta-form{grid-template-columns:1fr 1fr}
-  .cta-form__input--full{grid-column:1/-1}
-}
-
-@media (min-width:640px){
-  .btns{flex-direction:row}
-  .videos{grid-template-columns:repeat(3,1fr)}
-  .pain{grid-template-columns:1fr 1fr}
-}
-@media (min-width:900px){
-  .plans{grid-template-columns:repeat(3,1fr);gap:1.2rem}
-  .hero{display:grid;grid-template-columns:1.1fr .9fr;gap:3rem;align-items:center}
-  .hero>div{min-width:0}
-  .stats{margin-top:0}
-  h1{font-size:clamp(4rem,calc((min(100vw,1120px) - 112px)*.55/3.7),6.5rem)}
-  .steps{grid-template-columns:1fr auto 1fr auto 1fr auto 1fr;gap:.6rem;align-items:center}
-  .steps__arrow svg{transform:rotate(0);width:36px}
-}
-
 
 /* =========================================
-   СТИЛИ ДЛЯ БЛОКА С КРУГОМ
+   БЛОК С КРУГОМ
    ========================================= */
 .circle-section {
   padding-block: clamp(3rem, 7vw, 5rem);
@@ -257,23 +300,18 @@ footer{padding-block:2rem 2.5rem;color:var(--muted);font-size:.9rem}
   background: var(--panel);
   border: 1px solid var(--line);
   border-radius: 80px;
-  
   width: clamp(180px, 20vw, 240px);
   height: clamp(60px, 6vw, 70px);
-  
   display: flex;
   align-items: center;
   justify-content: center;
-  
   padding: 0 15px;
   font-size: clamp(.9rem, 1.1vw, 1.1rem); 
-  
   font-weight: 600;
   color: var(--ink);
   text-align: center;
   line-height: 1.15;
   white-space: normal;
-  
   z-index: 5;
   box-shadow: 0 4px 15px rgba(0,0,0,.2);
   opacity: 0;
@@ -321,23 +359,79 @@ footer{padding-block:2rem 2.5rem;color:var(--muted);font-size:.9rem}
   100% { border-color: rgba(46,143,255, 0.6); box-shadow: 0 4px 20px rgba(46,143,255,.2); }
 }
 
+/* =========================================
+   АДАПТИВ ПОД РАЗЛИЧНЫЕ УСТРОЙСТВА
+   ========================================= */
+
+@media (min-width: 640px) {
+  .cta-form{grid-template-columns:1fr 1fr}
+  .cta-form__input--full{grid-column:1/-1}
+  .btns{flex-direction:row}
+  .videos{grid-template-columns:repeat(3,1fr)}
+  .pain{grid-template-columns:1fr 1fr}
+}
+
+@media (min-width: 540px) and (max-width: 899px) {
+  .videos{grid-template-columns:repeat(2,1fr)}
+  .plans{grid-template-columns:1fr 1fr}
+  .plan:last-child { grid-column: 1 / -1; }
+  .plan:last-child ul { columns: 2; column-gap: 2rem; }
+  .plan:last-child li { break-inside: avoid; }
+}
+
+@media (min-width: 900px) {
+  .plans{grid-template-columns:repeat(3,1fr);gap:1.2rem}
+  .plan:last-child { grid-column: auto; }
+  .plan:last-child ul { columns: auto; }
+  .hero{display:grid;grid-template-columns:1.1fr .9fr;gap:3rem;align-items:center}
+  .hero>div{min-width:0}
+  .stats{margin-top:0}
+  h1{font-size:clamp(4rem,calc((min(100vw,1120px) - 112px)*.55/3.7),6.5rem)}
+  .steps{grid-template-columns:1fr auto 1fr auto 1fr auto 1fr;gap:.6rem;align-items:center}
+  .steps__arrow svg{transform:rotate(0);width:36px}
+}
+
 @media (max-width: 768px) {
   .orbit-wrap { aspect-ratio: auto; display: flex; flex-direction: column; gap: 1.2rem; margin-top: 2rem; padding: 0; }
   .orbit-svg { display: none; }
   .orbit-item { 
-    position: static; 
-    width: 100%; 
-    max-width: 320px;
-    height: auto; 
-    min-height: 60px;
-    font-size: 1rem;
-    padding: 10px 15px;
-    transform: none !important; 
-    animation: none !important; 
+    position: static; width: 100%; max-width: 320px; height: auto; min-height: 60px;
+    font-size: 1rem; padding: 10px 15px; transform: none !important; animation: none !important; 
   }
   .circle-section.in .orbit-item { transform: none !important; }
   .orbit-center { width: 160px; height: 160px; margin-bottom: 1.5rem; }
   .orbit-center__label { font-size: 1.4rem; }
+}
+
+@media (max-width: 380px) {
+  :root { --pad: 1rem; }
+  h1 { font-size: clamp(2.8rem, 15vw, 3.5rem); }
+  .stats { padding: 1.2rem; gap: 1rem; }
+  .stat b { font-size: 1.8rem; }
+  
+  .ba__label-text { font-size: 0.7rem; padding: 0.3rem 0.6rem; top: 1rem; }
+  .ba__label-text--left { left: 1rem; }
+  .ba__label-text--right { right: 1rem; }
+  .ba__handle { width: 4px; }
+  .ba__handle::before { width: 50px; height: 50px; }
+  .ba__handle::after { font-size: 1.4rem; }
+  
+  .plan { padding: 1.2rem; }
+  .step { padding: 1.2rem; }
+  .step__num { font-size: 3.5rem; }
+  .orbit-item { font-size: 0.9rem; padding: 8px 12px; min-height: 50px; }
+  .cta-box { padding: 1.2rem; }
+}
+
+@media (horizontal-viewport-segments: 2) {
+  .wrap { 
+    padding-left: max(env(viewport-segment-left 1 0), var(--pad));
+    padding-right: max(env(viewport-segment-right 0 0), var(--pad));
+  }
+  .orbit-svg { display: none; }
+  .orbit-wrap { display: flex; flex-direction: column; aspect-ratio: auto; }
+  .orbit-item { position: static; width: 100%; transform: none !important; animation: none !important; margin-bottom: 0.5rem; }
+  .circle-section.in .orbit-item { transform: none !important; }
 }
 </style>
 </head>
@@ -403,7 +497,11 @@ footer{padding-block:2rem 2.5rem;color:var(--muted);font-size:.9rem}
     <section>
       <h2>Разница очевидна</h2>
       <p class="lead">Потяни ползунок и посмотри, как меняется восприятие бренда.</p>
+      
       <div class="ba" id="baWrap">
+        <div class="ba__label-text ba__label-text--left">До</div>
+        <div class="ba__label-text ba__label-text--right">После</div>
+
         <div class="ba__side ba__before">
           <img src="before.jpg" class="ba__img" alt="До" onerror="this.style.display='none'">
         </div>
@@ -441,13 +539,11 @@ footer{padding-block:2rem 2.5rem;color:var(--muted);font-size:.9rem}
       </div>
     </section>
 
-    <!-- БЛОК С КРУГОМ -->
     <section class="circle-section" id="circleSection">
       <h2>Мы забираем весь визуал <span style="color:var(--accent)">полностью.</span></h2>
       <p class="lead" style="text-align: center; margin-inline: auto;">Вы ставите задачу — мы выполняем.</p>
 
       <div class="orbit-wrap">
-        
         <svg class="orbit-svg" viewBox="0 0 800 800">
           <line class="svg-line-1" x1="400" y1="400" x2="400" y2="80" />
           <line class="svg-line-2" x1="400" y1="400" x2="680" y2="170" />
@@ -474,7 +570,6 @@ footer{padding-block:2rem 2.5rem;color:var(--muted);font-size:.9rem}
         <div class="orbit-item orbit-item--6">Листовки, баннеры</div>
         <div class="orbit-item orbit-item--7">ИИ-аватар</div>
         <div class="orbit-item orbit-item--8">Фирменный стиль, лого</div>
-
       </div>
     </section>
 
@@ -497,47 +592,52 @@ footer{padding-block:2rem 2.5rem;color:var(--muted);font-size:.9rem}
       <p class="lead">Три тарифа — от 25 000 до 60 000 рублей в месяц.</p>
       <div class="plans">
         <article class="plan">
-          <div class="plan__badge-zone"><span class="plan__badge">Минимальный вход</span></div>
+          <div class="plan__badge-zone">
+            <span class="plan__badge">Для одной ниши</span>
+          </div>
           <h3>Быстрый старт</h3>
           <p class="price">25&nbsp;000 ₽ <small>/ месяц</small></p>
-          <p class="about">Пакет из 10 коротких ИИ-роликов по вашему ТЗ: генерация видео, озвучка, музыка и монтаж.</p>
           <ul>
-            <li>10 коротких ИИ-роликов по вашему ТЗ</li>
-            <li>Дикторская ИИ-озвучка</li>
-            <li>Подбор музыки и финальный монтаж</li>
-            <li>1 круг правок включён в стоимость</li>
+            <li>До 10 роликов в месяц под одну выбранную площадку по вашим готовым сценариям.</li>
+            <li>Базовая упаковка<em>Аватар профиля и шаблоны для постов в едином стиле.</em></li>
+            <li>Профессиональный монтаж<em>Цветокоррекция, склейки, подбор треков и звуковые эффекты.</em></li>
+            <li>1 круг правок включён в стоимость.</li>
           </ul>
           <a class="btn btn--main" href="https://t.me/Sergey_MRK">Выбрать «Быстрый старт»</a>
         </article>
+        
         <article class="plan">
-          <div class="plan__badge-zone"><span class="plan__badge plan__badge--hidden">—</span></div>
+          <div class="plan__badge-zone">
+            <span class="plan__badge">Для одной ниши</span>
+          </div>
           <h3>Базовая упаковка</h3>
           <p class="price">35&nbsp;000 ₽ <small>/ месяц</small></p>
-          <p class="about">15 продающих ИИ-роликов. Анализ продукта, концепции и сценарии — на нашей стороне.</p>
           <ul>
-            <li>15 роликов в месяц<em>Короткие продающие видео</em></li>
-            <li>Логотип бренда<em>Генерация и доработка дизайнером</em></li>
-            <li>Фирменный стиль<em>Обложки и шаблоны постов</em></li>
-            <li>Создание лендинга<em>Одностраничный сайт</em></li>
-            <li>5 форматов адаптации<em>Reels, Shorts, VK, сайт</em></li>
+            <li>До 15 роликов в месяц с трендовыми эффектами, монтажом и качественным звуком.</li>
+            <li>Создание 1 лендинга под один ваш конкретный продукт или рекламную акцию.</li>
+            <li>5 рекламных баннеров или продающих карточек товара.</li>
+            <li>Графика в едином стиле<em>Полное визуальное оформление ваших соцсетей.</em></li>
+            <li>Адаптация под 5 форматов<em>Готовый контент пересобирается под Reels, Shorts, VK, TG и сайт.</em></li>
+            <li>2 круга правок включены в стоимость для каждого элемента контента.</li>
           </ul>
           <a class="btn btn--main" href="https://t.me/Sergey_MRK">Выбрать «Базовая упаковка»</a>
         </article>
+        
         <article class="plan">
-          <div class="plan__badge-zone"><span class="plan__badge plan__badge--hidden">—</span></div>
+          <div class="plan__badge-zone">
+            <span class="plan__badge">Для бизнеса и ОАО</span>
+          </div>
           <h3>Полный продакшн</h3>
           <p class="price">60&nbsp;000 ₽ <small>/ месяц</small></p>
-          <p class="about">До 30 роликов под ключ. Весь контент бренда — без съёмочной группы и подрядчиков.</p>
           <ul>
-            <li>30 роликов в месяц<em>Ежедневное производство</em></li>
-            <li>ИИ-аватар бренда<em>Цифровой ведущий</em></li>
-            <li>Графика без лимитов<em>Посты, баннеры, упаковка</em></li>
-            <li>Логотип и стиль<em>Шаблоны для соцсетей</em></li>
-            <li>Создание лендинга<em>Одностраничный сайт</em></li>
-            <li>Аутсорсинг<em>Стратегия и публикация</em></li>
-            <li>Все площадки<em>Reels, Shorts, VK, сайт</em></li>
-            <li>Личный менеджер<em>Правки вне очереди</em></li>
-            <li>Отчётность<em>Метрики каждый месяц</em></li>
+            <li>До 30 роликов в месяц для ежедневного непрерывного контент-вещания.</li>
+            <li>Вся графика для бизнеса БЕЗ ЛИМИТОВ<em>Листовки, меню, наружная реклама и рекламные баннеры.</em></li>
+            <li>Сложный B2B-визуал<em>Презентации инвесторам, маркетинг-киты для дилеров, оформление курсов и уроков.</em></li>
+            <li>Веб-разработка<em>Создание лендингов под любые задачи компании или разработка одного крупного сайта под ключ.</em></li>
+            <li>Цифровые ведущие и виртуальные фотореалистичные модели для бренда.</li>
+            <li>Мультиязычная озвучка<em>Перевод и адаптация голоса под зарубежные площадки.</em></li>
+            <li>Личный менеджер и внесение правок вне очереди за 15 минут.</li>
+            <li>Аналитика контента<em>Ежемесячный отчёт по ключевым метрикам и вовлечённости.</em></li>
           </ul>
           <a class="btn btn--main" href="https://t.me/Sergey_MRK">Выбрать «Полный продакшн»</a>
         </article>
@@ -580,8 +680,8 @@ if(baW){
   baW.addEventListener('mousedown',e=>{drag=true;updBA(e.clientX)});
   window.addEventListener('mousemove',e=>{if(drag)updBA(e.clientX)});
   window.addEventListener('mouseup',()=>drag=false);
-  baW.addEventListener('touchstart',e=>updBA(e.touches[0].clientX),{passive:true});
-  baW.addEventListener('touchmove',e=>updBA(e.touches[0].clientX),{passive:true});
+  baW.addEventListener('touchstart',e=>{updBA(e.touches[0].clientX)},{passive:true});
+  baW.addEventListener('touchmove',e=>{updBA(e.touches[0].clientX)},{passive:true});
 }
 
 // Скрипт анимации круга при скролле
