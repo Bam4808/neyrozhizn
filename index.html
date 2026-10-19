@@ -1,7 +1,7 @@
 <!DOCTYPE html>
 <html lang="ru">
 <head>
-<meta charset="UTF-8">
+<meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
 <title>Нейро Жизнь — ИИ-студия</title>
 <meta name="color-scheme" content="dark">
@@ -53,46 +53,32 @@ h2{margin:0 0 .8rem;font-weight:800;font-size:clamp(1.7rem,1.2rem + 2.6vw,3rem);
 .vcard{position:relative;border-radius:24px;overflow:hidden;aspect-ratio:9/16;background:linear-gradient(135deg,#141414,#0A0A0A);border:1px solid var(--line);transition:border-color .4s,transform .4s}
 .vcard:hover{border-color:rgba(46,143,255,.5);transform:translateY(-6px)}
 .vcard video{position:absolute;inset:0;width:100%;height:100%;object-fit:cover;z-index:2}
-.vcard::after{content:'';position:absolute;inset:0;z-index:1;background:linear-gradient(180deg,transparent 55%,rgba(0,0,0,.75));pointer-events:none}
-.vcard__cat{position:absolute;top:1.1rem;left:1.1rem;z-index:3;font-size:.7rem;letter-spacing:.2em;color:var(--accent);text-transform:uppercase;font-weight:600}
-.vcard__play{position:absolute;top:50%;left:50%;transform:translate(-50%,-50%);width:64px;height:64px;border-radius:50%;background:#fff;display:flex;align-items:center;justify-content:center;z-index:3}
-.vcard__play svg{width:36%;height:36%;fill:#000;margin-left:6%}
-.vcard__title{position:absolute;bottom:1.1rem;left:1.1rem;right:1.1rem;z-index:3;font-size:1.05rem;font-weight:800;letter-spacing:-.02em;line-height:1.2}
-.vcard__ph{position:absolute;inset:0;z-index:1;display:flex;align-items:center;justify-content:center;padding:1rem;background:linear-gradient(135deg,#141414,#0A0A0A)}
-.vcard__ph code{font-size:.7rem;color:var(--muted);padding:.35rem .7rem;border-radius:6px;background:rgba(255,255,255,.05);border:1px solid var(--line)}
+.vcard::after{content:'';position:absolute;inset:0;z-index:3;background:linear-gradient(180deg,transparent 55%,rgba(0,0,0,.75));pointer-events:none}
+.vcard__title{position:absolute;bottom:1.1rem;left:1.1rem;right:1.1rem;z-index:4;font-size:1.05rem;font-weight:800;letter-spacing:-.02em;line-height:1.2}
 
-/* ====== БЛОК СРАВНЕНИЯ ====== */
-.ba{position:relative;border-radius:24px;overflow:hidden;aspect-ratio:16/10;border:1px solid var(--line);user-select:none;background:#0A0A0A;isolation:isolate}
+/* ====== БЛОК СРАВНЕНИЯ (ТОЛЬКО КАРТИНКИ) ====== */
+.ba{position:relative;border-radius:24px;overflow:hidden;aspect-ratio:16/9;border:1px solid var(--line);user-select:none;touch-action:pan-y;background:#0A0A0A}
 @media(max-width:640px){.ba{aspect-ratio:4/3}}
 
-.ba__side{position:absolute;inset:0;display:flex;flex-direction:column;align-items:center;justify-content:center;gap:.9rem;text-align:center;padding:1.5rem;overflow:hidden}
+/* Слои для картинок */
+.ba__side{position:absolute;inset:0}
+.ba__before{background:#0d1319;z-index:1}
+.ba__after{background:#0a1e2e;z-index:2;clip-path:inset(0 50% 0 0)}
 
-/* Картинки внутри ползунка */
+/* Сами картинки */
 .ba__img {
   position: absolute;
   inset: 0;
   width: 100%;
   height: 100%;
   object-fit: cover;
-  z-index: 0;
+  display: block;
 }
 
-/* Правый слой (обычный сайт) — фон, всегда на всю ширину */
-.ba__before{background:linear-gradient(135deg,#0d1319,#050810);z-index:1}
-
-/* Левый слой (наш сайт) — поверх, обрезается справа */
-.ba__after{background:linear-gradient(135deg,#0a1e2e,#101d3a);z-index:2;clip-path:inset(0 50% 0 0)}
-
-.ba__side > .ba__label,
-.ba__side > .ba__big{position:relative;z-index:3;pointer-events:none;text-shadow:0 2px 10px rgba(0,0,0,.8)}
-
-.ba__label{font-size:.7rem;letter-spacing:.3em;text-transform:uppercase;color:var(--muted);font-weight:600}
-.ba__big{font-size:clamp(1.5rem,5vw,3.5rem);font-weight:800;letter-spacing:-.04em;line-height:1}
-.ba__after .ba__big{background:linear-gradient(120deg,#22d3ee,#60a5fa,#3b82f6);-webkit-background-clip:text;-webkit-text-fill-color:transparent;background-clip:text}
-
-.ba__handle{position:absolute;top:0;bottom:0;left:50%;width:2px;background:var(--accent);transform:translateX(-50%);cursor:ew-resize;z-index:10;box-shadow:0 0 20px rgba(46,143,255,.7)}
+/* Ползунок */
+.ba__handle{position:absolute;top:0;bottom:0;left:50%;width:2px;background:var(--accent);transform:translateX(-50%);cursor:ew-resize;z-index:5;box-shadow:0 0 20px rgba(46,143,255,.7)}
 .ba__handle::before{content:'';position:absolute;top:50%;left:50%;transform:translate(-50%,-50%);width:clamp(44px,9vw,56px);height:clamp(44px,9vw,56px);border-radius:50%;background:#fff;box-shadow:0 6px 20px rgba(0,0,0,.4)}
-.ba__handle::after{content:'⇄';position:absolute;top:50%;left:50%;transform:translate(-50%,-50%);color:#06101F;font-size:1.1rem;font-weight:800}
+.ba__handle::after{content:'⇄';position:absolute;top:50%;left:50%;transform:translate(-50%,-50%);color:#000;font-size:1.1rem;font-weight:800}
 
 .pain{display:grid;gap:1rem;grid-template-columns:1fr}
 .pain__card{background:var(--panel);border:1px solid var(--line);border-radius:24px;padding:1.6rem 1.5rem}
@@ -136,6 +122,7 @@ h2{margin:0 0 .8rem;font-weight:800;font-size:clamp(1.7rem,1.2rem + 2.6vw,3rem);
 @keyframes scroll{to{transform:translateX(-50%)}}
 
 main{position:relative;isolation:isolate}
+
 footer{padding-block:2rem 2.5rem;color:var(--muted);font-size:.9rem}
 
 .cta-box{background:#4A9BFF;color:#06101F;border-radius:28px;padding:clamp(1.6rem,5vw,3.2rem)}
@@ -153,6 +140,7 @@ footer{padding-block:2rem 2.5rem;color:var(--muted);font-size:.9rem}
   .cta-form{grid-template-columns:1fr 1fr}
   .cta-form__input--full{grid-column:1/-1}
 }
+
 @media (min-width:640px){
   .btns{flex-direction:row}
   .videos{grid-template-columns:repeat(3,1fr)}
@@ -189,9 +177,18 @@ footer{padding-block:2rem 2.5rem;color:var(--muted);font-size:.9rem}
         </div>
       </div>
       <div class="stats" aria-label="Студия в цифрах">
-        <div class="stat"><b>8 лет</b><span>в IT-инфраструктуре</span></div>
-        <div class="stat"><b>20+</b><span>нейросетей в работе</span></div>
-        <div class="stat"><b>30</b><span>ниш в работе</span></div>
+        <div class="stat">
+          <b>8 лет</b>
+          <span>в IT-инфраструктуре</span>
+        </div>
+        <div class="stat">
+          <b>20+</b>
+          <span>нейросетей в работе</span>
+        </div>
+        <div class="stat">
+          <b>30</b>
+          <span>ниш в работе</span>
+        </div>
       </div>
     </div>
 
@@ -203,49 +200,30 @@ footer{padding-block:2rem 2.5rem;color:var(--muted);font-size:.9rem}
       <div class="videos">
         <div class="vcard">
           <video src="avatar.mp4" autoplay muted loop playsinline preload="metadata"></video>
-          <div class="vcard__cat">Avatar</div>
-          <div class="vcard__ph"><code>avatar.mp4</code></div>
-          <div class="vcard__play"><svg viewBox="0 0 24 24"><path d="M8 5v14l11-7z"/></svg></div>
-          <div class="vcard__title">Мой цифровой двойник</div>
+          <div class="vcard__title">Еда и доставка</div>
         </div>
         <div class="vcard">
           <video src="beauty.mp4" autoplay muted loop playsinline preload="metadata"></video>
-          <div class="vcard__cat">Beauty</div>
-          <div class="vcard__ph"><code>beauty.mp4</code></div>
-          <div class="vcard__play"><svg viewBox="0 0 24 24"><path d="M8 5v14l11-7z"/></svg></div>
-          <div class="vcard__title">Эксперт в бьюти-сфере</div>
+          <div class="vcard__title">Мой цифровой двойник</div>
         </div>
         <div class="vcard">
           <video src="logistics.mp4" autoplay muted loop playsinline preload="metadata"></video>
-          <div class="vcard__cat">Logistics</div>
-          <div class="vcard__ph"><code>logistics.mp4</code></div>
-          <div class="vcard__play"><svg viewBox="0 0 24 24"><path d="M8 5v14l11-7z"/></svg></div>
-          <div class="vcard__title">Грузоперевозки — B2B</div>
+          <div class="vcard__title">Недвижимость</div>
         </div>
       </div>
     </section>
 
-    <section id="compare">
+    <!-- БЛОК СРАВНЕНИЯ БЕЗ НАДПИСЕЙ -->
+    <section>
       <h2>Разница очевидна</h2>
       <p class="lead">Потяни ползунок и посмотри, как меняется восприятие бренда.</p>
-
-      <!-- БЛОК СРАВНЕНИЯ -->
       <div class="ba" id="baWrap">
-
-        <!-- Правый слой: ДО -->
         <div class="ba__side ba__before">
           <img src="before.jpg" class="ba__img" alt="До" onerror="this.style.display='none'">
-          <div class="ba__label">До</div>
-          <div class="ba__label" style="margin-top:auto; margin-bottom:1.5rem;">Шаблонно · Скучно · Забывается</div>
         </div>
-
-        <!-- Левый слой: ПОСЛЕ -->
         <div class="ba__side ba__after">
           <img src="after.jpg" class="ba__img" alt="После" onerror="this.style.display='none'">
-          <div class="ba__label">После</div>
-          <div class="ba__label" style="margin-top:auto; margin-bottom:1.5rem;">Ярко · Быстро · Прибыльно</div>
         </div>
-
         <div class="ba__handle" id="baHandle"></div>
       </div>
     </section>
@@ -254,10 +232,26 @@ footer{padding-block:2rem 2.5rem;color:var(--muted);font-size:.9rem}
       <h2>Знакомо? <span style="color:var(--accent)">Это не продакшн.</span> Это боль.</h2>
       <p class="lead">Четыре проблемы, которые забирают ваши деньги и время.</p>
       <div class="pain">
-        <div class="pain__card"><h3><span class="pain__ico">!</span> Срывают дедлайны</h3><p>Обещали баннер за 3 дня — сделали за неделю. Ролик к запуску не готов. <b>Вы теряете деньги.</b></p><ul><li>Сдача за 24–48 часов</li><li>Правки за 15 минут</li></ul></div>
-        <div class="pain__card"><h3><span class="pain__ico">!</span> Всё делают руками</h3><p>Съёмки с оператором, актёром, светом, монтажёром. <b>Долго, дорого, зависимо.</b> Актёр заболел — съёмка встала.</p><ul><li>Без съёмок и актёров</li><li>Весь продакшн — на цифре</li></ul></div>
-        <div class="pain__card"><h3><span class="pain__ico">!</span> Качество — позор</h3><p>Кривые шрифты, дёрганая картинка, звук «из ведра». <b>Такой контент дешевит бренд,</b> а не продаёт.</p><ul><li>Чистая графика и монтаж</li><li>Логика продаж и окупаемость</li></ul></div>
-        <div class="pain__card"><h3><span class="pain__ico">!</span> Не понимают ТЗ</h3><p>Просили одно — сделали другое. <b>Красиво, но мимо.</b> Каждая правка — новый спор и счёт.</p><ul><li>Строго по вашему ТЗ</li><li>Правки — без счетов</li></ul></div>
+        <div class="pain__card">
+          <h3><span class="pain__ico">!</span> Срывают дедлайны</h3>
+          <p>Обещали баннер за 3 дня — сделали за неделю. Ролик к запуску не готов. <b>Вы теряете деньги.</b></p>
+          <ul><li>Сдача за 24–48 часов</li><li>Правки за 15 минут</li></ul>
+        </div>
+        <div class="pain__card">
+          <h3><span class="pain__ico">!</span> Всё делают руками</h3>
+          <p>Съёмки с оператором, актёром, светом, монтажёром. <b>Долго, дорого, зависимо.</b> Актёр заболел — съёмка встала.</p>
+          <ul><li>Без съёмок и актёров</li><li>Весь продакшн — на цифре</li></ul>
+        </div>
+        <div class="pain__card">
+          <h3><span class="pain__ico">!</span> Качество — позор</h3>
+          <p>Кривые шрифты, дёрганая картинка, звук «из ведра». <b>Такой контент дешевит бренд,</b> а не продаёт.</p>
+          <ul><li>Чистая графика и монтаж</li><li>Логика продаж и окупаемость</li></ul>
+        </div>
+        <div class="pain__card">
+          <h3><span class="pain__ico">!</span> Не понимают ТЗ</h3>
+          <p>Просили одно — сделали другое. <b>Красиво, но мимо.</b> Каждая правка — новый спор и счёт.</p>
+          <ul><li>Строго по вашему ТЗ</li><li>Правки — без счетов</li></ul>
+        </div>
       </div>
     </section>
 
@@ -284,7 +278,12 @@ footer{padding-block:2rem 2.5rem;color:var(--muted);font-size:.9rem}
           <h3>Быстрый старт</h3>
           <p class="price">25&nbsp;000 ₽ <small>/ месяц</small></p>
           <p class="about">Пакет из 10 коротких ИИ-роликов по вашему ТЗ: генерация видео, озвучка, музыка и монтаж.</p>
-          <ul><li>10 коротких ИИ-роликов по вашему ТЗ</li><li>Дикторская ИИ-озвучка</li><li>Подбор музыки и финальный монтаж</li><li>1 круг правок включён в стоимость</li></ul>
+          <ul>
+            <li>10 коротких ИИ-роликов по вашему ТЗ</li>
+            <li>Дикторская ИИ-озвучка</li>
+            <li>Подбор музыки и финальный монтаж</li>
+            <li>1 круг правок включён в стоимость</li>
+          </ul>
           <a class="btn btn--main" href="https://t.me/Sergey_MRK">Выбрать «Быстрый старт»</a>
         </article>
         <article class="plan">
@@ -292,7 +291,13 @@ footer{padding-block:2rem 2.5rem;color:var(--muted);font-size:.9rem}
           <h3>Базовая упаковка</h3>
           <p class="price">35&nbsp;000 ₽ <small>/ месяц</small></p>
           <p class="about">15 продающих ИИ-роликов. Анализ продукта, концепции и сценарии — на нашей стороне.</p>
-          <ul><li>15 роликов в месяц<em>Короткие продающие видео</em></li><li>Логотип бренда<em>Генерация и доработка дизайнером</em></li><li>Фирменный стиль<em>Обложки и шаблоны постов</em></li><li>Создание лендинга<em>Одностраничный сайт</em></li><li>5 форматов адаптации<em>Reels, Shorts, VK, сайт</em></li></ul>
+          <ul>
+            <li>15 роликов в месяц<em>Короткие продающие видео</em></li>
+            <li>Логотип бренда<em>Генерация и доработка дизайнером</em></li>
+            <li>Фирменный стиль<em>Обложки и шаблоны постов</em></li>
+            <li>Создание лендинга<em>Одностраничный сайт</em></li>
+            <li>5 форматов адаптации<em>Reels, Shorts, VK, сайт</em></li>
+          </ul>
           <a class="btn btn--main" href="https://t.me/Sergey_MRK">Выбрать «Базовая упаковка»</a>
         </article>
         <article class="plan">
@@ -300,7 +305,17 @@ footer{padding-block:2rem 2.5rem;color:var(--muted);font-size:.9rem}
           <h3>Полный продакшн</h3>
           <p class="price">60&nbsp;000 ₽ <small>/ месяц</small></p>
           <p class="about">До 30 роликов под ключ. Весь контент бренда — без съёмочной группы и подрядчиков.</p>
-          <ul><li>30 роликов в месяц<em>Ежедневное производство</em></li><li>ИИ-аватар бренда<em>Цифровой ведущий</em></li><li>Графика без лимитов<em>Посты, баннеры, упаковка</em></li><li>Логотип и стиль<em>Шаблоны для соцсетей</em></li><li>Создание лендинга<em>Одностраничный сайт</em></li><li>Аутсорсинг<em>Стратегия и публикация</em></li><li>Все площадки<em>Reels, Shorts, VK, сайт</em></li><li>Личный менеджер<em>Правки вне очереди</em></li><li>Отчётность<em>Метрики каждый месяц</em></li></ul>
+          <ul>
+            <li>30 роликов в месяц<em>Ежедневное производство</em></li>
+            <li>ИИ-аватар бренда<em>Цифровой ведущий</em></li>
+            <li>Графика без лимитов<em>Посты, баннеры, упаковка</em></li>
+            <li>Логотип и стиль<em>Шаблоны для соцсетей</em></li>
+            <li>Создание лендинга<em>Одностраничный сайт</em></li>
+            <li>Аутсорсинг<em>Стратегия и публикация</em></li>
+            <li>Все площадки<em>Reels, Shorts, VK, сайт</em></li>
+            <li>Личный менеджер<em>Правки вне очереди</em></li>
+            <li>Отчётность<em>Метрики каждый месяц</em></li>
+          </ul>
           <a class="btn btn--main" href="https://t.me/Sergey_MRK">Выбрать «Полный продакшн»</a>
         </article>
       </div>
@@ -325,34 +340,24 @@ footer{padding-block:2rem 2.5rem;color:var(--muted);font-size:.9rem}
 </div>
 
 <script>
-/* ============ ПОЛЗУНОК ============ */
-var baW = document.getElementById('baWrap');
-var baH = document.getElementById('baHandle');
-var baBefore = document.querySelector('.ba__before');
-var baAfter  = document.querySelector('.ba__after');
-var drag = false;
-
+const baW=document.getElementById('baWrap');
+const baH=document.getElementById('baHandle');
+const baA=document.querySelector('.ba__after');
+let drag=false;
 function updBA(x){
-  if(!baW) return;
-  var r = baW.getBoundingClientRect();
-  var p = ((x - r.left) / r.width) * 100;
-  p = Math.max(0, Math.min(100, p));
-  baH.style.left = p + '%';
-  
-  baAfter.style.clipPath = 'inset(0 ' + (100 - p) + '% 0 0)';
-  baBefore.style.clipPath = 'inset(0 0 0 ' + p + '%)';
+  if(!baW)return;
+  const r=baW.getBoundingClientRect();
+  let p=((x-r.left)/r.width)*100;
+  p=Math.max(0,Math.min(100,p));
+  baH.style.left=p+'%';
+  baA.style.clipPath=`inset(0 ${100-p}% 0 0)`;
 }
-
 if(baW){
-  baW.addEventListener('mousedown', function(e){ drag = true; updBA(e.clientX); });
-  window.addEventListener('mousemove', function(e){ if(drag) updBA(e.clientX); });
-  window.addEventListener('mouseup', function(){ drag = false; });
-  
-  baW.addEventListener('touchstart', function(e){ updBA(e.touches[0].clientX); }, {passive:true});
-  baW.addEventListener('touchmove', function(e){ updBA(e.touches[0].clientX); }, {passive:true});
-  
-  var r0 = baW.getBoundingClientRect();
-  updBA(r0.left + r0.width / 2);
+  baW.addEventListener('mousedown',e=>{drag=true;updBA(e.clientX)});
+  window.addEventListener('mousemove',e=>{if(drag)updBA(e.clientX)});
+  window.addEventListener('mouseup',()=>drag=false);
+  baW.addEventListener('touchstart',e=>updBA(e.touches[0].clientX),{passive:true});
+  baW.addEventListener('touchmove',e=>updBA(e.touches[0].clientX),{passive:true});
 }
 </script>
 </body>
