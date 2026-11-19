@@ -328,6 +328,41 @@ footer{padding-block:2rem 2.5rem;color:var(--muted);font-size:.9rem}
   line-height:1.45;
 }
 .plans__note strong{color:#65bfff}
+/* Компактное портфолио на телефонах и раскрытых Fold */
+@media (max-width: 899px) {
+  .portfolio { padding-block: 2rem; }
+  .portfolio__head { margin-bottom: 1rem; }
+  .portfolio__head h2 { font-size: clamp(1.4rem, 4.8vw, 2.35rem); }
+  .carousel__stage {
+    display: grid;
+    grid-template-columns: minmax(0, 1fr);
+    aspect-ratio: auto;
+    border-radius: 16px;
+  }
+  .carousel__slide {
+    position: relative;
+    grid-area: 1 / 1;
+    min-width: 0;
+    transform: none;
+  }
+  .carousel__slide::after { display: none; }
+  .carousel__media {
+    position: static;
+    width: 100%;
+    height: auto;
+    aspect-ratio: 16 / 9;
+    object-fit: contain;
+  }
+  .carousel__caption {
+    position: static;
+    padding: .65rem .85rem .8rem;
+    font-size: .95rem;
+    background: none;
+    text-shadow: none;
+  }
+  .carousel__caption small { font-size: .8rem; }
+  .carousel__dots { margin-top: .75rem; }
+}
 </style>
 </head>
 <body>
@@ -555,6 +590,7 @@ footer{padding-block:2rem 2.5rem;color:var(--muted);font-size:.9rem}
           <input class="cta-form__input cta-form__input--full" type="text" name="contact" maxlength="200" placeholder="Telegram или телефон" required>
           <button class="cta-form__btn" type="submit">ЗАПИСАТЬСЯ НА РАЗБОР</button>
         </form>
+        <p class="cta-box__note" id="lead-status" role="status" hidden></p>
         <p class="cta-box__note">Маслов Сергей Александрович · свяжется и согласует время</p>
       </div>
     </section>
@@ -692,6 +728,34 @@ if(baW){
 
   playActiveVideo();
   startAutoplay();
+})();
+</script>
+<script>
+(() => {
+  const form = document.querySelector('.cta-form');
+  const status = document.getElementById('lead-status');
+  const button = form.querySelector('button[type="submit"]');
+  form.addEventListener('submit', async (event) => {
+    event.preventDefault();
+    button.disabled = true;
+    status.hidden = false;
+    status.textContent = 'Отправляем заявку…';
+    try {
+      const response = await fetch(form.action, {
+        method: 'POST',
+        body: new URLSearchParams(new FormData(form)),
+        headers: { Accept: 'application/json' },
+        redirect: 'error'
+      });
+      if (!response.ok || (await response.json()).ok !== true) throw new Error('Lead not confirmed');
+      form.reset();
+      status.textContent = 'Отправлено';
+    } catch {
+      status.textContent = 'Не удалось отправить заявку. Попробуйте позже.';
+    } finally {
+      button.disabled = false;
+    }
+  });
 })();
 </script>
 </body>
