@@ -296,6 +296,38 @@ footer{padding-block:2rem 2.5rem;color:var(--muted);font-size:.9rem}
   background: var(--accent);
   transform: scale(1.4);
 }
+.plan h3,.plan .price{text-align:center}
+.plan__badge-zone{justify-content:center}
+.plan .price{display:flex;align-items:center;justify-content:center;flex-wrap:wrap;gap:.25em}
+.plan .price__amount,.plan .price small{white-space:nowrap}
+.plans__note {
+  display:flex;
+  align-items:center;
+  gap:clamp(.65rem, 2.4vw, 1.2rem);
+  margin-top:1.25rem;
+  padding:clamp(.85rem, 2.5vw, 1.2rem);
+  border:1px solid #35485d;
+  border-radius:18px;
+  background:linear-gradient(115deg,#112031,#101216 52%,#142131);
+}
+.plans__note-icon {
+  display:grid;
+  place-items:center;
+  flex:0 0 2rem;
+  height:2rem;
+  border:2px solid #d8ebff;
+  border-radius:50%;
+  color:#d8ebff;
+  font:700 1.2rem Georgia,serif;
+}
+.plans__note p {
+  margin:0;
+  padding-inline-start:clamp(.65rem, 2.4vw, 1.2rem);
+  border-inline-start:1px solid #547695;
+  font-size:clamp(.875rem, 2vw, 1rem);
+  line-height:1.45;
+}
+.plans__note strong{color:#65bfff}
 </style>
 </head>
 <body>
@@ -464,54 +496,52 @@ footer{padding-block:2rem 2.5rem;color:var(--muted);font-size:.9rem}
     </section>
 
     <section id="tarify">
-      <h2>Тарифы</h2>
-      <p class="lead">Три тарифа — от 25 000 до 60 000 рублей в месяц.</p>
+      <h2>Пакеты услуг</h2>
+      <p class="lead">Комплексное производство контента под задачи бизнеса</p>
       <div class="plans">
         <article class="plan">
           <div class="plan__badge-zone"><span class="plan__badge">Минимальный вход</span></div>
           <h3>Быстрый старт</h3>
-          <p class="price">35&nbsp;000 ₽ <small>/ месяц</small></p>
-          <p class="about">Пакет из 10 коротких ИИ-роликов по вашему ТЗ: генерация видео, озвучка, музыка и монтаж.</p>
+          <p class="price"><span style="font-size:.55em;font-weight:600;color:var(--muted)">от</span> <span class="price__amount">35&nbsp;000 ₽</span> <small>/ месяц</small></p>
+          <p class="about">Готовый контент по вашему ТЗ: видео, озвучка, музыка и монтаж.</p>
           <ul>
-            <li>10 коротких ИИ-роликов по вашему ТЗ</li>
-            <li>Дикторская ИИ-озвучка</li>
-            <li>Подбор музыки и финальный монтаж</li>
-            <li>1 круг правок включён в стоимость</li>
+            <li>10 ИИ-роликов до 30 секунд</li>
+            <li>Монтаж и озвучка</li>
+            <li>1 круг правок</li>
           </ul>
           <a class="btn btn--main" href="https://t.me/Sergey_MRK">Выбрать «Быстрый старт»</a>
         </article>
         <article class="plan">
-          <div class="plan__badge-zone"><span class="plan__badge plan__badge--hidden">—</span></div>
-          <h3>Базовая упаковка</h3>
-          <p class="price">45&nbsp;000 ₽ <small>/ месяц</small></p>
-          <p class="about">15 продающих ИИ-роликов. Анализ продукта, концепции и сценарии — на нашей стороне.</p>
+          <div class="plan__badge-zone"><span class="plan__badge">Выгодный выбор</span></div>
+          <h3>Бизнес</h3>
+          <p class="price"><span style="font-size:.55em;font-weight:600;color:var(--muted)">от</span> <span class="price__amount">45&nbsp;000 ₽</span> <small>/ месяц</small></p>
+          <p class="about">Контент-производство под ключ для стабильного роста.</p>
           <ul>
-            <li>15 роликов в месяц<em>Короткие продающие видео</em></li>
-            <li>Логотип бренда<em>Генерация и доработка дизайнером</em></li>
-            <li>Фирменный стиль<em>Обложки и шаблоны постов</em></li>
-            <li>Создание лендинга<em>Одностраничный сайт</em></li>
-            <li>5 форматов адаптации<em>Reels, Shorts, VK, сайт</em></li>
+            <li>10 видео до 30 секунд</li>
+            <li>10 графических материалов</li>
+            <li>Контент-план на месяц</li>
+            <li>2 круга правок</li>
           </ul>
-          <a class="btn btn--main" href="https://t.me/Sergey_MRK">Выбрать «Базовая упаковка»</a>
+          <a class="btn btn--main" href="https://t.me/Sergey_MRK">Выбрать «Бизнес»</a>
         </article>
         <article class="plan">
-          <div class="plan__badge-zone"><span class="plan__badge plan__badge--hidden">—</span></div>
+          <div class="plan__badge-zone"><span class="plan__badge">Полный комплекс</span></div>
           <h3>Полный продакшн</h3>
-          <p class="price">80&nbsp;000 ₽ <small>/ месяц</small></p>
-          <p class="about">До 30 роликов под ключ. Весь контент бренда — без съёмочной группы и подрядчиков.</p>
+          <p class="price"><span style="font-size:.55em;font-weight:600;color:var(--muted)">от</span> <span class="price__amount">100&nbsp;000 ₽</span> <small>/ месяц</small></p>
+          <p class="about">Ваш внешний ИИ-продакшн: контент, упаковка и сопровождение.</p>
           <ul>
-            <li>30 роликов в месяц<em>Ежедневное производство</em></li>
-            <li>ИИ-аватар бренда<em>Цифровой ведущий</em></li>
-            <li>Графика без лимитов<em>Посты, баннеры, упаковка</em></li>
-            <li>Логотип и стиль<em>Шаблоны для соцсетей</em></li>
-            <li>Создание лендинга<em>Одностраничный сайт</em></li>
-            <li>Аутсорсинг<em>Стратегия и публикация</em></li>
-            <li>Все площадки<em>Reels, Shorts, VK, сайт</em></li>
-            <li>Личный менеджер<em>Правки вне очереди</em></li>
-            <li>Отчётность<em>Метрики каждый месяц</em></li>
+            <li>20 видео до 30 секунд</li>
+            <li>20 графических материалов</li>
+            <li>Лендинг (1 в месяц)</li>
+            <li>Презентация (1 в месяц)</li>
+            <li>Сценарии, контент-план и сопровождение</li>
           </ul>
           <a class="btn btn--main" href="https://t.me/Sergey_MRK">Выбрать «Полный продакшн»</a>
         </article>
+      </div>
+      <div class="plans__note">
+        <span class="plans__note-icon" aria-hidden="true">i</span>
+        <p>Конечная стоимость <strong>зависит от обсуждённого объёма услуг</strong>, сложности проекта и индивидуальных задач.</p>
       </div>
     </section>
 
@@ -519,10 +549,10 @@ footer{padding-block:2rem 2.5rem;color:var(--muted);font-size:.9rem}
       <div class="cta-box">
         <h2 class="cta-box__title">15 минут. <span class="cta-box__accent">Считаем вашу экономию.</span></h2>
         <p class="cta-box__sub">Проведём исследование текущего контента и рассчитаем чистую экономию бюджета.</p>
-        <form class="cta-form" action="#" method="post" novalidate>
-          <input class="cta-form__input" type="text" name="name" placeholder="Имя" required>
-          <input class="cta-form__input" type="text" name="company" placeholder="Компания или ниша" required>
-          <input class="cta-form__input cta-form__input--full" type="text" name="contact" placeholder="Telegram или телефон" required>
+        <form class="cta-form" action="https://neuzhiznlife.ru/lead" method="post" accept-charset="UTF-8">
+          <input class="cta-form__input" type="text" name="name" maxlength="200" placeholder="Имя" required>
+          <input class="cta-form__input" type="text" name="company" maxlength="200" placeholder="Компания или ниша" required>
+          <input class="cta-form__input cta-form__input--full" type="text" name="contact" maxlength="200" placeholder="Telegram или телефон" required>
           <button class="cta-form__btn" type="submit">ЗАПИСАТЬСЯ НА РАЗБОР</button>
         </form>
         <p class="cta-box__note">Маслов Сергей Александрович · свяжется и согласует время</p>
