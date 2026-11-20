@@ -363,6 +363,11 @@ footer{padding-block:2rem 2.5rem;color:var(--muted);font-size:.9rem}
   .carousel__caption small { font-size: .8rem; }
   .carousel__dots { margin-top: .75rem; }
 }
+.bar__links{display:flex;align-items:center;gap:clamp(.4rem,2vw,1rem)}
+.bar__email{display:inline-grid;place-items:center;flex:0 0 44px;width:44px;height:44px;color:var(--ink,#f4f4f6);border-radius:8px}
+.bar__email:hover,.bar__email:focus-visible{color:var(--accent)}
+.bar__envelope{position:relative;width:23px;height:16px;border:2px solid currentColor;border-radius:3px;overflow:hidden}
+.bar__envelope::after{content:"";position:absolute;left:50%;top:-9px;width:15px;height:15px;border-right:2px solid currentColor;border-bottom:2px solid currentColor;transform:translateX(-50%) rotate(45deg)}
 </style>
 </head>
 <body>
@@ -370,7 +375,11 @@ footer{padding-block:2rem 2.5rem;color:var(--muted);font-size:.9rem}
 <div class="wrap">
   <header class="bar">
     <a class="logo" href="#top">НейроЖизнь</a>
+    <div class="bar__links">
     <a class="nav" href="#tarify">Тарифы</a>
+      <a class="bar__email" href="mailto:mr.bam94@vk.com" aria-label="Написать на mr.bam94@vk.com" title="mr.bam94@vk.com"><span class="bar__envelope" aria-hidden="true"></span></a>
+      <a class="bar__email" href="tel:+79394509775" aria-label="Позвонить по номеру +7 939 450-97-75" title="+7 939 450-97-75"><span aria-hidden="true" style="font-size:24px;line-height:1">☎</span></a>
+    </div>
   </header>
 
   <main id="top">
